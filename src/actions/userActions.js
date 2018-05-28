@@ -2,7 +2,8 @@ import { USER_REGISTER } from './types';
 import { USER_LOGIN } from './types';
 
 export const loginUser = (userData) => dispatch => {
-    fetch('http://localhost/react-demo-php/login.php', { 
+    // fetch('http://localhost:3000/user/login', { 
+        fetch('http://app-shoppe.alapatt.co:3000/user/login', { 
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -7,6 +7,7 @@ import { createStore , applyMiddleware } from 'redux';
 import Posts from './components/Posts';
 import PostForm from './components/PostForm';
 import Login from './components/Login';
+import Routes from './components/Routes';
 
 import store from './store';
 
@@ -16,11 +17,8 @@ class App extends Component {
       <Provider store={store}>
       <div className="App">
       <br />
-        {/* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header> */}
-        <Login/>
+        <Routes />
+        {/* <Login/> */}
         {/* <hr /> */}
         {/* <PostForm/> */}
         {/* <hr/> */}
