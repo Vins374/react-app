@@ -18,8 +18,7 @@ class Login extends Component {
         super(props);
         this.state = {
             username:'',
-            password:'',
-            message:''
+            password:''
         };
 
         this.onChange = this.onChange.bind(this);
@@ -42,8 +41,9 @@ class Login extends Component {
     onSubmit(e) {
         e.preventDefault();
 
+        // this.props.beginLogin();
         const user = { 
-            username: this.state.username,
+            email: this.state.username,
             password: this.state.password
         }
 
@@ -53,11 +53,24 @@ class Login extends Component {
     }
 
     render() {
-        const user  = this.state.loginData;
+        const { user, loader, error }  = this.props;
+
+        console.log(error);
+
+        // if (loader) {
+        //     loade = <div>Loading...</div>;
+        //   }
+
+        // if(loader)
+        //     const loader_content = '<p> Loading </p>';
+        // else 
+        //     const loader_content = '<p> </p>';
+
+        
         return (
             <div>
                 <form onSubmit={this.onSubmit}>
-               <Card>
+               <Card className="login-card">
                     <CardContent>
                     <TextField
                         label="Username"
@@ -76,7 +89,7 @@ class Login extends Component {
                         value={this.state.password}
                     />
                     </CardContent>
-                    <CardActions>
+                    <CardActions className="text-a-c" >
                     <Button type="submit" variant="raised" color="primary">
                         Submit
                     </Button>
@@ -84,7 +97,8 @@ class Login extends Component {
                     <Button variant="raised" color="default">
                         Register
                     </Button>
-                    <p> {this.state.message} </p>
+                    { loader && <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /> }
+                    { error && <p > {error} </p> }
                     </CardActions>
                 </Card>
                 </form>
@@ -98,7 +112,9 @@ Login.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    user: state.user.loginData
+    user: state.user.loginData,
+    loader: state.user.loader,
+    error: state.user.error
 });
 
 export default connect(mapStateToProps, { loginUser })(Login);

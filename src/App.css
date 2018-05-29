@@ -28,3 +28,20 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.width-60-per {
+  width: 60% !important;
+}
+
+.width-30-per {
+  width: 30% !important;
+}
+
+.login-card {
+  width: 30% !important;
+  text-align: center;
+}
+
+.text-a-c {
+  text-align: center;
+}

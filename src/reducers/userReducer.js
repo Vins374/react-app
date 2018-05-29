@@ -1,9 +1,13 @@
 import { USER_LOGIN } from '../actions/types';
+import { USER_LOGIN_BEGIN } from '../actions/types';
+import { USER_LOGIN_ERROR } from '../actions/types';
 import { USER_REGISTER } from '../actions/types';
 
 const initialState = {
     registerData: {},
-    loginData: {}
+    loginData: {},
+    loader: false,
+    error: ''
 };
 
 export default function(state = initialState, action) {
@@ -11,7 +15,9 @@ export default function(state = initialState, action) {
         case USER_LOGIN:
             return {
                 ...state,
-                loginData: action.payload
+                loginData: action.payload,
+                loader: false,
+                error: action.payload.message
             };
         case USER_REGISTER:
         
@@ -19,6 +25,18 @@ export default function(state = initialState, action) {
                 ...state,
                 registerData: action.payload
             };
+        case USER_LOGIN_BEGIN:
+            return {
+                ...state,
+                loader: true,
+                error: ''
+            }
+        case USER_LOGIN_ERROR:
+            return {
+                ...state,
+                loader: false,
+                error: 'Something went wrong'
+            }
         default:
             return state;
     }
