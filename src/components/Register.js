@@ -11,33 +11,27 @@ import TextField from '@material-ui/core/TextField';
 
 import { NavLink } from 'react-router-dom';
 
-import { history } from '../helpers';
-
 import PropTypes from 'prop-types';
 import{ connect } from 'react-redux';
-import { loginUser } from '../actions/userActions';
+import { registerUser } from '../actions/userActions';
 
-class Login extends Component { 
+class Register extends Component { 
 
     constructor(props) {
         super(props);
         this.state = {
+            fullname:'',
             username:'',
             password:''
         };
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.gotoRegister = this.gotoRegister.bind(this);
+        this.gotoLogin = this.gotoLogin.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
         console.log(nextProps.user);
-        if(nextProps.user)
-            this.setState({ message : nextProps.user.message });
-        // if(nextProps.newPost) {
-        //     this.props.posts.unshift(nextProps.newPost);
-        // }
     }
 
     onChange(e) {
@@ -49,21 +43,18 @@ class Login extends Component {
 
         // this.props.beginLogin();
         const user = { 
+            fullname: this.state.fullname,
             email: this.state.username,
             password: this.state.password
         }
 
-        this.props.loginUser(user);
+        this.props.registerUser(user);
 
         
     }
 
-    gotoRegister(e) {
-        // browserHistory.push('/register');
-        this.props.history.push('/register');
-        // this.props.history.push('/register');
-        // history.push('/register');
-        // this.context.router.history.push('/register');
+    gotoLogin(){
+        this.props.history.push('/');
     }
 
     render() {
@@ -87,6 +78,14 @@ class Login extends Component {
                <Card className="login-card">
                     <CardContent>
                     <TextField
+                        label="Name"
+                        required
+                        name="fullname"
+                        onChange={this.onChange} 
+                        value={this.state.fullname}
+                    />
+                    <br/>
+                    <TextField
                         label="Username"
                         required
                         name="username"
@@ -108,9 +107,9 @@ class Login extends Component {
                         Submit
                     </Button>
 
-                    {/* <NavLink to='/register'> */}
-                    <Button variant="raised" color="default" onClick={this.gotoRegister}>
-                        Register
+                    {/* <NavLink to='/'> */}
+                    <Button variant="raised" color="default" onClick={this.gotoLogin}>
+                        Login
                     </Button>
                     {/* </NavLink> */}
                     { loader && <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /> }
@@ -123,7 +122,7 @@ class Login extends Component {
     }
 }
 
-Login.propTypes = {
+Register.propTypes = {
     loginUser: PropTypes.func.isRequired
 };
 
@@ -133,4 +132,4 @@ const mapStateToProps = state => ({
     error: state.user.error
 });
 
-export default connect(mapStateToProps, { loginUser })(Login);
+export default connect(mapStateToProps, { registerUser })(Register);
