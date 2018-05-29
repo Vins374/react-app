@@ -5,7 +5,7 @@ import { USER_LOGIN_ERROR } from './types';
 
 export const loginUser = (userData) => dispatch => {
     dispatch(beginLogin());
-    fetch('http://localhost/react-demo-php/login.php', { 
+    fetch('http://localhost/react-demo-php/login.php', {    
         // fetch('http://app-shoppe.alapatt.co:3000/user/login', { 
             method: 'POST',
             headers: {
