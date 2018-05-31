@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import LoginNew from './LoginNew';
 import Login from './Login';
 import Register from './Register';
+import RegisterNew from './RegisterNew';
 
 
 class Routes extends Component {
@@ -11,9 +12,9 @@ class Routes extends Component {
       return (
         <div>
             <Switch>
-                <Route exact path='/' component={Login} />
+                <Route exact path='/' component={LoginNew} />
                 <Route exact path='/login-new' component={LoginNew} />
-                <Route exact path='/register' component={Register} />
+                <Route exact path='/register' component={RegisterNew} />
             </Switch>
         </div>
       );

@@ -123,7 +123,7 @@ class Register extends Component {
 }
 
 Register.propTypes = {
-    loginUser: PropTypes.func.isRequired
+    registerUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

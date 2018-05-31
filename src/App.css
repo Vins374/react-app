@@ -1,47 +1,12 @@
-.App {
-  text-align: auto;
-  width: 90%;
-  margin-left: 5%;
+.login-page-bg {
+  background-image: url('./assets/img/login.jpg'); background-size: cover; background-position: top center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.width-60-per {
-  width: 60% !important;
-}
-
-.width-30-per {
-  width: 30% !important;
-}
-
-.login-card {
-  width: 30% !important;
-  text-align: center;
-}
-
-.text-a-c {
-  text-align: center;
+.login-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  color: #fff;
 }

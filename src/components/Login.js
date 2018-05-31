@@ -35,9 +35,6 @@ class Login extends Component {
         console.log(nextProps.user);
         if(nextProps.user)
             this.setState({ message : nextProps.user.message });
-        // if(nextProps.newPost) {
-        //     this.props.posts.unshift(nextProps.newPost);
-        // }
     }
 
     onChange(e) {
@@ -46,41 +43,19 @@ class Login extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-
-        // this.props.beginLogin();
         const user = { 
             email: this.state.username,
             password: this.state.password
         }
-
         this.props.loginUser(user);
-
-        
     }
 
     gotoRegister(e) {
-        // browserHistory.push('/register');
         this.props.history.push('/register');
-        // this.props.history.push('/register');
-        // history.push('/register');
-        // this.context.router.history.push('/register');
     }
 
     render() {
         const { user, loader, error }  = this.props;
-
-        console.log(error);
-
-        // if (loader) {
-        //     loade = <div>Loading...</div>;
-        //   }
-
-        // if(loader)
-        //     const loader_content = '<p> Loading </p>';
-        // else 
-        //     const loader_content = '<p> </p>';
-
-        
         return (
             <div>
                 <form onSubmit={this.onSubmit}>
@@ -97,8 +72,8 @@ class Login extends Component {
                     <TextField
                         label="Password"
                         required
-                        name="password"
                         type="password"
+                        name="password"
                         onChange={this.onChange} 
                         value={this.state.password}
                     />

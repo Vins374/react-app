@@ -2,20 +2,22 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 import{ connect } from 'react-redux';
-import { loginUser } from '../actions/userActions';
+import { registerUser } from '../actions/userActions';
 
-class LoginNew extends Component { 
+class RegisterNew extends Component { 
 
     constructor(props) {
         super(props);
         this.state = {
-            username:'',
+            fullname:'',
+            email:'',
+            mobile:'',
             password:''
         };
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.gotoRegister = this.gotoRegister.bind(this);
+        this.gotoLogin = this.gotoLogin.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -31,14 +33,15 @@ class LoginNew extends Component {
     onSubmit(e) {
         e.preventDefault();
         const user = { 
+            fullname: this.state.fullname,
             email: this.state.username,
             password: this.state.password
         }
-        this.props.loginUser(user);
+        this.props.registerUser(user);
     }
 
-    gotoRegister(e) {
-        this.props.history.push('/register');
+    gotoLogin(e) {
+        this.props.history.push('/');
     }
 
     render() {
@@ -48,7 +51,7 @@ class LoginNew extends Component {
                 <nav className="navbar navbar-expand-lg bg-primary navbar-transparent navbar-absolute" color-on-scroll="500">
                     <div className="container">
                         <div className="navbar-wrapper">
-                        <a className="navbar-brand" href="#pablo">App Login</a>
+                        <a className="navbar-brand" href="#pablo">App Register</a>
                         </div>
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="sr-only">Toggle navigation</span>
@@ -59,14 +62,14 @@ class LoginNew extends Component {
                         <div className="collapse navbar-collapse justify-content-end" id="navbar">
                         <ul className="navbar-nav">
                             
-                            <li className= "nav-item " onClick={this.gotoRegister}>
+                            <li className= "nav-item active ">
                                 <a className="nav-link">
                                 <i className="material-icons">person_add</i>
                                 Register
                                 </a>
                             </li>
-                            <li className= "nav-item  active ">
-                                <a href="#" className="nav-link">
+                            <li className= "nav-item " onClick={this.gotoLogin}>
+                                <a className="nav-link">
                                 <i className="material-icons">fingerprint</i>
                                 Login
                                 </a>
@@ -82,11 +85,21 @@ class LoginNew extends Component {
                             <form className="form" method="" action="#" onSubmit={this.onSubmit}>
                                 <div className="card card-login">
                                     <div className="card-header card-header-rose text-center">
-                                    <h4 className="card-title">Log in</h4>
+                                    <h4 className="card-title">Regsiter</h4>
                                     
                                     </div>
                                     <div className="card-body ">
-                                    
+                                    <span className="bmd-form-group">
+                                        <div className="input-group">
+                                            <div className="input-group-prepend">
+                                                <span className="input-group-text">
+                                                <i className="material-icons">contacts</i>
+                                                </span>
+                                            </div>
+                                            <input type="text" className="form-control" placeholder="Fullname..." name="fullname" onChange={this.onChange} value={this.state.fullname} required />
+                                        </div>
+                                    </span>
+
                                     <span className="bmd-form-group">
                                         <div className="input-group">
                                             <div className="input-group-prepend">
@@ -94,9 +107,21 @@ class LoginNew extends Component {
                                                 <i className="material-icons">email</i>
                                                 </span>
                                             </div>
-                                            <input type="email" className="form-control" placeholder="Email..." name="username" onChange={this.onChange} value={this.state.username} required />
+                                            <input type="email" className="form-control" placeholder="Email..." name="username" onChange={this.onChange} value={this.state.email} required />
                                         </div>
                                     </span>
+
+                                    <span className="bmd-form-group">
+                                        <div className="input-group">
+                                            <div className="input-group-prepend">
+                                                <span className="input-group-text">
+                                                <i className="material-icons">stay_current_portrait</i>
+                                                </span>
+                                            </div>
+                                            <input type="number" className="form-control" placeholder="Mobile..." name="mobile" onChange={this.onChange} value={this.state.mobile} required />
+                                        </div>
+                                    </span>
+
                                     <span className="bmd-form-group">
                                         <div className="input-group">
                                             <div className="input-group-prepend">
@@ -147,8 +172,8 @@ class LoginNew extends Component {
     }
 }
 
-LoginNew.propTypes = {
-    loginUser: PropTypes.func.isRequired
+RegisterNew.propTypes = {
+    registerUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -157,4 +182,4 @@ const mapStateToProps = state => ({
     error: state.user.error
 });
 
-export default connect(mapStateToProps, { loginUser })(LoginNew);
+export default connect(mapStateToProps, { registerUser })(RegisterNew);
